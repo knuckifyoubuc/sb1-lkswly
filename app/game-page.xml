@@ -1,0 +1,34 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="navigatingTo" class="bg-gray-100">
+    <ActionBar title="Categories Game" class="bg-blue-500 text-white" />
+    
+    <StackLayout class="p-4">
+        <Label text="{{ currentLetter }}" class="text-6xl font-bold text-center text-blue-500 mb-4" />
+        
+        <ListView items="{{ categories }}" class="mb-4">
+            <ListView.itemTemplate>
+                <GridLayout columns="*, 2*" class="p-2">
+                    <Label text="{{ name }}" col="0" class="text-lg" />
+                    <TextField text="{{ $parents['ListView'].answers[id] }}" 
+                             hint="Enter {{ name }}"
+                             col="1"
+                             class="p-2 border rounded"
+                             returnKeyType="next" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+
+        <Button text="Submit Answers" 
+                tap="{{ onSubmit }}" 
+                class="bg-blue-500 text-white p-4 rounded-lg" 
+                isEnabled="{{ !isSubmitted }}" />
+
+        <Label text="{{ score }}" 
+               class="text-2xl text-center mt-4" 
+               visibility="{{ isSubmitted ? 'visible' : 'collapsed' }}" />
+
+        <Button text="Next Round" 
+                tap="{{ onNextRound }}" 
+                class="bg-green-500 text-white p-4 rounded-lg mt-4" 
+                visibility="{{ isSubmitted ? 'visible' : 'collapsed' }}" />
+    </StackLayout>
+</Page>
